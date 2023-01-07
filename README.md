@@ -8,15 +8,12 @@
 
 ## Prerequisites
 To get up and running with this project:
-1. Create an AWS profile and grant necessary permissions to a user
-2. Create a Snowflake Account and Resources
-3. Install Terraform
+1. Create an [AWS](https://aws.amazon.com/) account and install the AWS CLI
+2. Create a [Snowflake](https://www.snowflake.com/) Account
+3. Install [Terraform](https://developer.hashicorp.com/terraform/downloads)
 
 ## Setup
 1. Clone the repo to your local machine:
-``` sh
-$ git clone {name}
-```
 2. In the working directory run: 
 ```sh 
 $ touch terraform/terraform.tfvars
