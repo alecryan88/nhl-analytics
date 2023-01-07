@@ -1,9 +1,21 @@
+//Create Snowflake Warehouse
+resource "snowflake_warehouse" "warehouse" {
+  name           = upper(replace(local.config.project_name, "-", "_"))
+  comment        = "foo"
+  warehouse_size = "x-small"
+  max_cluster_count = 1 
+  scaling_policy = "Economy"
+}
+
+
+// Create Snowflake Database
 resource "snowflake_database" "db" {
   provider = snowflake
-  name     = "NHL"
+  name     = upper(replace(local.config.project_name, "-", "_"))
   comment  = "Database created for snowflake by terraform."
 }
 
+// Create Snowflake Schema
 resource "snowflake_schema" "schema" {
   provider = snowflake
   database = snowflake_database.db.name
@@ -11,7 +23,7 @@ resource "snowflake_schema" "schema" {
   comment  = "Schema for ${upper(var.environment)} schema created by terraform."
 }
 
-// Create table if configured as JSON
+// Create Snowflake Tables for each loader
 resource "snowflake_table" "json_table" {
   for_each = {
     for index, loader in local.environment_config : loader.name => loader

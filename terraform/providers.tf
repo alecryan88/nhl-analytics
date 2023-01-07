@@ -12,4 +12,5 @@ provider "snowflake" {
   password = var.snowflake_password
   region   = var.snowflake_region
   role     = "ACCOUNTADMIN"
+
 }
