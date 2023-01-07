@@ -1,0 +1,9 @@
+project_name: nhl-elt
+loaders:
+    - name: nhl-api-game-events
+      schedule: "cron(0 10 * * ? *)"
+      output_file_format : TYPE = JSON NULL_IF = []
+
+    - name: test
+      schedule: "cron(0 10 * * ? *)"
+      output_file_format : TYPE = JSON NULL_IF = []
