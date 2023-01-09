@@ -11,13 +11,14 @@ To get up and running with this project:
 1. Create an [AWS](https://aws.amazon.com/) account and install the AWS CLI
 2. Create a [Snowflake](https://www.snowflake.com/) Account
 3. Install [Terraform](https://developer.hashicorp.com/terraform/downloads)
+4. Python 3.7+
 
 ## Setup
 1. Clone the repo to your local machine.
 
-3. Define a loader in config.yml. Details on how to do this can be found [here](loaders/README.md)
+2. Edit the config.yml project name
 
-4. Initialize terraform: 
+3. Initialize terraform: 
 ```sh
 $ make init
 ```
@@ -39,13 +40,13 @@ snowflake_account  =
 ```
 
 
-5. Activate the virtual environment created by the `make init` step. This follows the `venv` nameing convenvtion:
+4. Activate the virtual environment created by the `make init` step. This follows the `venv` naming convenvtion:
 ```sh
 $ source venv/bin/activate
 ```
-During the make init step, all of the requirements for running the terraform Python helper scripts are installed. 
+During the `make init` step, all of the requirements for running the terraform Python helper scripts are installed. 
 
-6. Run the apply command to spin up the application infrastructure: 
+5. Run the apply command to spin up the application infrastructure: 
 ```sh
 $ make apply
 ```

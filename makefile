@@ -16,15 +16,30 @@ snowflake_account  =
 endef
 export VARS
 
+
+define CONFIG
+project_name:
+loaders:
+    - name:
+      schedule: "cron(0 10 * * ? *)"
+      output_file_format : TYPE = JSON NULL_IF = []
+endef
+export CONFIG
+
 init:
 	terraform -chdir=terraform init
+	
 	rm -f terraform/terraform.tfvars
 	touch terraform/terraform.tfvars
-	python3 -m venv venv
-	
-	
 	@echo "$$VARS" >> terraform/terraform.tfvars
+	
+	rm -f config.yml
+	touch config.yml
+	@echo "$$CONFIG" >> config.yml
 
+	python3 -m venv venv
+	source venv/bin/activate && pip install --upgrade pip
+	source venv/bin/activate && pip install -r requirements.txt
 
 apply:
 	terraform -chdir=terraform fmt
