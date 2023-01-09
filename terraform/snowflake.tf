@@ -1,10 +1,10 @@
 //Create Snowflake Warehouse
 resource "snowflake_warehouse" "warehouse" {
-  name           = upper(replace(local.config.project_name, "-", "_"))
-  comment        = "foo"
-  warehouse_size = "x-small"
-  max_cluster_count = 1 
-  scaling_policy = "Economy"
+  name              = upper(replace(local.config.project_name, "-", "_"))
+  comment           = "foo"
+  warehouse_size    = "x-small"
+  max_cluster_count = 1
+  scaling_policy    = "Economy"
 }
 
 

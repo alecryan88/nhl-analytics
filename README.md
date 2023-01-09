@@ -13,13 +13,19 @@ To get up and running with this project:
 3. Install [Terraform](https://developer.hashicorp.com/terraform/downloads)
 
 ## Setup
-1. Clone the repo to your local machine:
-2. In the working directory run: 
-```sh 
-$ touch terraform/terraform.tfvars
-```
-This will create a file for necessary environment variables that will be passed to terraform. In the file the variables below:
+1. Clone the repo to your local machine.
+
+3. Define a loader in config.yml. Details on how to do this can be found [here](loaders/README.md)
+
+4. Initialize terraform: 
 ```sh
+$ make init
+```
+This will create a file `terraform/terraform.tfvars` with environment variables that will be used by terraform to create your resources:
+```sh
+#Python
+python_version = <Automatically detected>
+
 #AWS
 aws_access_key = 
 aws_secret_key = 
@@ -31,10 +37,9 @@ snowflake_password =
 snowflake_region   = 
 snowflake_account  = 
 ```
-3. Define a loader in config.yml. Details on how to do this can be found [here](loaders/README.md)
 
-4. Run terraform: 
+
+5. Run the apply command to spin up the application infrastructure: 
 ```sh
-$ terraform apply -auto-approve
+$ make apply
 ```
-Thi will spin up all of the necessary resources for the project. Included in ths is a directory for each loader defined in config.yml located at loaders/{loader.name}. In this directory is 

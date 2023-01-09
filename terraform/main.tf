@@ -17,10 +17,10 @@ locals {
   loader_names = toset(local.config.loaders[*].name)
   environment_config = { for idx, item in local.config.loaders : item.name =>
     {
-      "name"          = "${var.environment}-${local.config.project_name}-${item.name}"
-      "schedule"      = item.schedule
-      "output_file_format"   = item.output_file_format
-      "original_name" = item.name
+      "name"               = "${var.environment}-${local.config.project_name}-${item.name}"
+      "schedule"           = item.schedule
+      "output_file_format" = item.output_file_format
+      "original_name"      = item.name
     }
   }
   role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.environment}-${local.config.project_name}"

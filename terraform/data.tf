@@ -3,7 +3,7 @@ data "aws_iam_policy_document" "s3_inline_acces_policy" {
     actions = [
       "s3:GetObject",
       "s3:GetObjectVersion",
-      
+
     ]
     effect = "Allow"
     resources = values(tomap({
@@ -70,7 +70,7 @@ data "aws_iam_policy_document" "lambda_s3" {
 data "archive_file" "zip" {
   for_each    = local.loader_names
   type        = "zip"
-  source_dir  = "../loaders/${each.value}/venv/lib/python3.9/site-packages"
+  source_dir  = "../loaders/${each.value}/venv/lib/python${var.python_version}/site-packages"
   output_path = "../loaders/${each.value}/lambda.zip"
 
   depends_on = [

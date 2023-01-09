@@ -34,3 +34,8 @@ variable "environment" {
   description = "The environment in which the project is running."
   type        = string
 }
+
+variable "python_version" {
+  description = "The python version used to create the virtual enviroment."
+  type        = string
+}
