@@ -1,4 +1,4 @@
-# nhl-analytics
+# NHL-Analytics
 
 
 
@@ -21,7 +21,7 @@ To get up and running with this project:
 ```sh
 $ make init
 ```
-This will create a file `terraform/terraform.tfvars` with environment variables that will be used by terraform to create your resources:
+This will create a file `terraform/terraform.tfvars` with environment variables that will be used by terraform to create the resources:
 ```sh
 #Python
 python_version = <Automatically detected>
@@ -39,7 +39,13 @@ snowflake_account  =
 ```
 
 
-5. Run the apply command to spin up the application infrastructure: 
+5. Activate the virtual environment created by the `make init` step. This follows the `venv` nameing convenvtion:
+```sh
+$ source venv/bin/activate
+```
+During the make init step, all of the requirements for running the terraform Python helper scripts are installed. 
+
+6. Run the apply command to spin up the application infrastructure: 
 ```sh
 $ make apply
 ```
