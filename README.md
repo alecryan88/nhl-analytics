@@ -1,6 +1,17 @@
 # NHL-Analytics
 
+## Description
+This project is an end-to-end data pipeline that extracts data from the NHL API and loads it into Snowflake for analysis. There are a few simple commands that abstract a lot of the complexity underneath. 
 
+## Motivation
+When I first started in analytics engineering, I found myself constatnly running into the problem of wanting to get an ELT pipeline and running for cheap. With the rise of tools like DBT, analytics engineer
+
+## Technologies
+- Terraform - Infrastructure
+- GitHub Actions - CI/CD
+- AWS Lambda - Data Processing
+- AWS S3 - Staging
+- Snowflake - Warehouse
 
 ## Architecture
 
