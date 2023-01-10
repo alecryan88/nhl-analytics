@@ -1,6 +1,5 @@
-name: Loader CIR
-on:
-  workflow_dispatch
+name: Loader CI
+on: workflow_dispatch
   - run: |
         echo "Log level: ${{ github.event.inputs.logLevel }}"
         echo "Tags: ${{ github.event.inputs.tags }}" 
