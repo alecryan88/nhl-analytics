@@ -4,8 +4,8 @@ define VARS
 python_version=$(PYTHON_VERSION)
 
 #AWS
-aws_access_key = 
-aws_secret_key = 
+aws_access_key_id = 
+aws_secret_access_key = 
 aws_region     = 
 
 #Snowflake
@@ -39,6 +39,10 @@ validate:
 plan:
 	terraform -chdir=terraform fmt
 	terraform -chdir=terraform plan
+
+output:
+	terraform -chdir=terraform fmt
+	terraform -chdir=terraform output
 
 
 destroy:

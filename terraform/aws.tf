@@ -3,16 +3,18 @@ resource "aws_s3_bucket" "buckets" {
   for_each = {
     for index, loader in local.environment_config : loader.name => loader
   }
-  bucket        = each.value.name
+  bucket        = each.value.s3_bucket_name
   force_destroy = true
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
-  for_each = snowflake_pipe.pipes
-  bucket   = each.key
+  for_each = {
+    for index, loader in local.environment_config : loader.name => loader
+  }
+  bucket = each.value.s3_bucket_name
 
   queue {
-    queue_arn = each.value.notification_channel
+    queue_arn = snowflake_pipe.pipes[each.value.name].notification_channel
     #When object is created in S3 bucket => send notification to queue
     events = ["s3:ObjectCreated:*"]
   }

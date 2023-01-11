@@ -63,7 +63,7 @@ resource "snowflake_storage_integration" "storage_integration" {
   enabled = true
 
   storage_allowed_locations = values(tomap({
-    for key, val in local.environment_config : key => "s3://${val.name}"
+    for key, val in local.environment_config : key => "s3://${val.s3_bucket_name}"
   }))
   storage_provider     = "S3"
   storage_aws_role_arn = "${local.role_arn}-snowflake-access-role"
@@ -79,7 +79,7 @@ resource "snowflake_stage" "stage" {
   schema              = snowflake_schema.schema.name
   storage_integration = snowflake_storage_integration.storage_integration.name
 
-  url         = "s3://${each.value.name}"
+  url         = "s3://${each.value.s3_bucket_name}"
   file_format = each.value.output_file_format
 }
 
