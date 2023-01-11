@@ -1,9 +1,9 @@
-variable "aws_access_key" {
-  description = "AWS secret acces key"
+variable "aws_access_key_id" {
+  description = "AWS acces key id"
 }
 
-variable "aws_secret_key" {
-  description = "AWS secret_key"
+variable "aws_secret_access_key" {
+  description = "AWS secret access key"
 }
 
 variable "aws_region" {
