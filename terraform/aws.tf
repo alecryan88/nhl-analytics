@@ -91,7 +91,19 @@ resource "aws_cloudwatch_event_target" "invoke_lambda" {
   for_each = {
     for index, loader in local.environment_config : loader.name => loader
   }
-  rule = each.value.name
+  rule = aws_cloudwatch_event_rule.schedule[each.value.name].name
   arn  = aws_lambda_function.loader_lambdas[each.value.original_name].arn
 }
 
+// Allow CloudWatch to invoke our function
+resource "aws_lambda_permission" "allow_cloudwatch_to_invoke" {
+  for_each = {
+    for index, loader in local.environment_config : loader.name => loader
+  }
+  function_name = each.value.name
+  statement_id  = "CloudWatchInvoke"
+  action        = "lambda:InvokeFunction"
+
+  source_arn = aws_cloudwatch_event_rule.schedule[each.value.name].arn
+  principal  = "events.amazonaws.com"
+}
