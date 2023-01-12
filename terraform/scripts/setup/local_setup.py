@@ -9,6 +9,7 @@ git_ignore = """
 
 venv
 .env
+lambda.zip
 
 """
 
