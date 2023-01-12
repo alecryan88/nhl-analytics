@@ -4,7 +4,7 @@ resource "snowflake_warehouse" "warehouse" {
   comment           = "foo"
   warehouse_size    = "x-small"
   max_cluster_count = 1
-  scaling_policy    = "Economy"
+  scaling_policy    = "ECONOMY"
 }
 
 

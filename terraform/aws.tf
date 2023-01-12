@@ -55,18 +55,20 @@ resource "aws_iam_role_policy_attachment" "lambda_s3" {
 }
 
 resource "aws_lambda_function" "loader_lambdas" {
-  for_each         = data.archive_file.zip
-  function_name    = "${var.environment}-${local.config.project_name}-${each.key}"
+  for_each = {
+    for index, loader in local.environment_config : loader.name => loader
+  }
+  function_name    = each.value.name
   role             = aws_iam_role.iam_for_lambda.arn
   package_type     = "Zip"
   runtime          = "python3.9"
   handler          = "app.handler"
-  filename         = each.value.output_path
+  filename         = data.archive_file.zip[each.value.original_name].output_path
   timeout          = 60
-  source_code_hash = each.value.output_sha
+  source_code_hash = data.archive_file.zip[each.value.original_name].output_sha
   environment {
     variables = {
-      "S3_BUCKET_NAME" : "${var.environment}-${local.config.project_name}-${each.key}"
+      "S3_BUCKET_NAME" : each.value.s3_bucket_name
     }
   }
 
@@ -92,7 +94,7 @@ resource "aws_cloudwatch_event_target" "invoke_lambda" {
     for index, loader in local.environment_config : loader.name => loader
   }
   rule = aws_cloudwatch_event_rule.schedule[each.value.name].name
-  arn  = aws_lambda_function.loader_lambdas[each.value.original_name].arn
+  arn  = aws_lambda_function.loader_lambdas[each.value.name].arn
 }
 
 // Allow CloudWatch to invoke our function
@@ -107,3 +109,4 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_invoke" {
   source_arn = aws_cloudwatch_event_rule.schedule[each.value.name].arn
   principal  = "events.amazonaws.com"
 }
+
