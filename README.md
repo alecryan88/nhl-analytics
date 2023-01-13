@@ -13,6 +13,9 @@ When I first started in analytics engineering, I found myself constatnly running
 - AWS S3 - Staging
 - Snowflake - Warehouse
 
+## Architecture
+<img src="architecture.png" width=100% height=70%>
+
 
 ## Prerequisites
 To get up and running with this project:
