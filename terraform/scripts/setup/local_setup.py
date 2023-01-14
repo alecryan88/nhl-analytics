@@ -33,6 +33,9 @@ if __name__ == "__main__":
 
 """
 
+requirements = """
+"""
+
 def create_venv(path):
     cmd = f"python3 -m venv ../loaders/{path}/venv"
     os.system(cmd)
@@ -96,6 +99,7 @@ for file in loader_set:
         create_file_if_not_exists(dir, "app.py", app.strip().format("test"))
         create_file_if_not_exists(dir, ".gitignore", git_ignore.strip())
         create_file_if_not_exists(dir, ".env", env.strip())
+        create_file_if_not_exists(dir, "requirements.txt", requirements.strip())
         create_venv(dir)
         install_dot_env(dir)
         

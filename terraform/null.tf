@@ -15,6 +15,24 @@ resource "null_resource" "local_setup" {
 }
 
 
+resource "null_resource" "local_requirements_install" {
+  for_each = local.loader_names
+
+  triggers = {
+    requirements_change = "${file("../loaders/${each.value}/requirements.txt")}"
+  }
+
+  provisioner "local-exec" {
+    command = "python3 scripts/setup/local_install_req.py ${each.value}"
+  }
+
+  depends_on = [
+    null_resource.local_setup
+  ]
+
+}
+
+
 resource "null_resource" "local_requirements_freeze" {
   for_each = local.loader_names
 
@@ -23,7 +41,7 @@ resource "null_resource" "local_requirements_freeze" {
   }
 
   provisioner "local-exec" {
-    command = "python3 scripts/setup/local_freeze_requirements.py nhl-api-game-events"
+    command = "python3 scripts/setup/local_freeze_req.py nhl-api-game-events"
   }
 
 }
