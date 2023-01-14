@@ -15,6 +15,20 @@ resource "null_resource" "local_setup" {
 }
 
 
+resource "null_resource" "local_requirements_freeze" {
+  for_each = local.loader_names
+
+  triggers = {
+    archive_zip = "${data.archive_file.zip[each.value].output_sha}"
+  }
+
+  provisioner "local-exec" {
+    command = "python3 scripts/setup/local_freeze_requirements.py nhl-api-game-events"
+  }
+
+}
+
+
 resource "null_resource" "local_destroy" {
   for_each = local.loader_names
 
@@ -39,7 +53,7 @@ resource "null_resource" "copy_app_code" {
   for_each = local.loader_names
 
   triggers = {
-    always = timestamp()
+    code_change = "${sha1(file("../loaders/${each.value}/app.py"))}"
   }
 
   provisioner "local-exec" {
@@ -52,9 +66,4 @@ resource "null_resource" "copy_app_code" {
 
   ]
 
-}
-
-
-resource "time_sleep" "wait_15_seconds" {
-  create_duration = "15s"
 }
