@@ -29,7 +29,6 @@ On your machine, when you run `make apply` terraform will read `config.yml` to u
 - Snowflake - Warehouse
 - Python - Application Code
 
-&nbsp;
 
 ## Prerequisites
 To get up and running with this project:
