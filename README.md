@@ -1,16 +1,16 @@
 # NHL-Analytics
 
 ## Description
-This project is an end-to-end data pipeline that extracts data from the NHL API and loads it into Snowflake for analysis. There are a few simple commands that allow users to get up and running very quickly. This project can be easily extended to add aditional loaders by updating `config.yml`. 
+This project is an end-to-end data pipeline that extracts data from the NHL API and loads it into Snowflake for analysis. There are a few simple commands that allow engineers to get up and running very quickly. This project can also be easily extended to add aditional loaders by updating `config.yml`. 
 
 ## Motivation
-When someone first starts their Analytics Engineering journey they typically start with [dbt](https://www.getdbt.com/). In many cases, dbt is the front door into the exciting world of the modern data stack. While dbt is a fantastic transformation tool, it won't help at all with data ingestion. This leads aspiring analytics engineers down a learning rabbit hole answering questions like:
+When someone first embrarks on their Analytics Engineering journey they typically start with [dbt](https://www.getdbt.com/). In many cases, dbt is the front door into the exciting world of the modern data stack. While dbt is a fantastic transformation tool, it won't help at all with data ingestion. This leads aspiring analytics engineers down a learning rabbit hole trying to answer questions like:
  - How do I get data into my data warehouse to transform with dbt?
  - Now that I have data in my data warehouse, how can I ensure that it stays fresh?
- - How can I update my data each hour, day, minute while turning off my computer?
+ - How can I update my data each hour, day, minute without leaving my computer open?
 
 
- These are all questions that I hope this project can answer or at least prolong by providing a simple framework for ingesting data into a data warehose and getting aspiring analytics engineers away from yet another udemy course and into the nitty gritty.
+ These are all questions that I hope this project can answer (or at least prolong) by providing a simple framework for ingesting data into Snowflake via Python application code.
 
 ## Technologies
 - Terraform - Infrastructure
