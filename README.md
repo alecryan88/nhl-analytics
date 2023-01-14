@@ -14,7 +14,7 @@ When I first started in analytics engineering, I found myself constatnly running
 - Snowflake - Warehouse
 
 ## Architecture
-<img src="architecture.png" width=100% height=70%>
+<img src="architecture.drawio.png" width=100% height=70%>
 
 
 ## Prerequisites
