@@ -1,4 +1,4 @@
-# NHL-Analytics
+# nhl-analytics
 
 ## Description
 This project is an end-to-end data pipeline that extracts data from the NHL API and loads it into Snowflake for analysis. There are a few simple commands that allow engineers to get up and running very quickly. This project can also be easily extended to add aditional loaders by updating `config.yml`. 
