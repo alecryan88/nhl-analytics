@@ -4,17 +4,26 @@
 This project is an end-to-end data pipeline that extracts data from the NHL API and loads it into Snowflake for analysis. There are a few simple commands that allow users to get up and running very quickly. This project can be easily extended to add aditional loaders by updating `config.yml`. 
 
 ## Motivation
-When I first started in analytics engineering, I found myself constatnly running into the problem of wanting to get an ELT pipeline and running for cheap. With the rise of tools like DBT, analytics engineer
+When someone first starts their Analytics Engineering journey they typically start with [dbt](https://www.getdbt.com/). In many cases, dbt is the front door into the exciting world of the modern data stack. While dbt is a fantastic transformation tool, it won't help at all with data ingestion. This leads aspiring analytics engineers down a learning rabbit hole answering questions like:
+ - How do I get data into my data warehouse to transform with dbt?
+ - Now that I have data in my data warehouse, how can I ensure that it stays fresh?
+ - How can I update my data each hour, day, minute while turning off my computer?
+
+
+ These are all questions that I hope this project can answer or at least prolong by providing a simple framework for ingesting data into a data warehose and getting aspiring analytics engineers away from yet another udemy course and into the nitty gritty.
 
 ## Technologies
 - Terraform - Infrastructure
-- GitHub Actions - CI/CD
 - AWS Lambda - Data Processing
 - AWS S3 - Staging
 - Snowflake - Warehouse
+- Python - Application Code
 
 ## Architecture
-<img src="pipeline.png" width=100% height=70%>
+Below is a diagram showing the high-level architecture for this project:
+
+
+<img src="pipeline.png" width=100% height=50%>
 
 
 ## Prerequisites
