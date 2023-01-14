@@ -33,19 +33,19 @@ resource "aws_iam_role" "snowflake_acccess_role" {
   assume_role_policy = data.aws_iam_policy_document.snowflake_assume_role_policy.json
 
   inline_policy {
-    name   = "${var.environment}-snowflake_s3_access_policy"
+    name   = "${var.environment}-${local.config.project_name}-snowflake_s3_access_policy"
     policy = data.aws_iam_policy_document.s3_inline_acces_policy.json
   }
 }
 
 resource "aws_iam_policy" "lambda_s3" {
-  name        = "${var.environment}-lambda-s3-permissions"
+  name        = "${var.environment}-${local.config.project_name}-lambda-s3-permissions"
   description = "Policy for lambda function to put objects to the necessary bucket."
   policy      = data.aws_iam_policy_document.lambda_s3.json
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name               = "${var.environment}-role-for-lambda"
+  name               = "${var.environment}-${local.config.project_name}-role-for-lambda"
   assume_role_policy = data.aws_iam_policy_document.lambda_execution_role.json
 }
 
@@ -102,11 +102,10 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_invoke" {
   for_each = {
     for index, loader in local.environment_config : loader.name => loader
   }
-  function_name = each.value.name
+  function_name = aws_lambda_function.loader_lambdas[each.value.name].id
   statement_id  = "CloudWatchInvoke"
   action        = "lambda:InvokeFunction"
 
   source_arn = aws_cloudwatch_event_rule.schedule[each.value.name].arn
   principal  = "events.amazonaws.com"
 }
-
