@@ -9,7 +9,6 @@ load_dotenv()
 
 client = boto3.client('s3')
 
-
 def get_game_data(game_id):
     url =f'https://statsapi.web.nhl.com/api/v1/game/{game_id}/feed/live'
     r = requests.get(url = url)
