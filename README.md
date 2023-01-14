@@ -3,6 +3,8 @@
 ## Description
 This project is an end-to-end data pipeline that extracts data from the NHL API and loads it into Snowflake for analysis. There are a few simple commands that allow engineers to get up and running very quickly. This project can also be easily extended to add aditional loaders by updating `config.yml`. 
 
+&nbsp;
+
 ## Motivation
 When someone first embrarks on their Analytics Engineering journey they typically start with [dbt](https://www.getdbt.com/). In many cases, dbt is the front door into the exciting world of the modern data stack. While dbt is a fantastic transformation tool, it won't help at all with data ingestion. This leads aspiring analytics engineers down a learning rabbit hole trying to answer questions like:
  - How do I get data into my data warehouse to transform with dbt?
@@ -12,12 +14,7 @@ When someone first embrarks on their Analytics Engineering journey they typicall
 
  These are all questions that I hope this project can answer (or at least prolong) by providing a simple framework for ingesting data into Snowflake via Python application code.
 
-## Technologies
-- Terraform - Infrastructure
-- AWS Lambda - Data Processing
-- AWS S3 - Staging
-- Snowflake - Warehouse
-- Python - Application Code
+&nbsp;
 
 ## Architecture
 Below is a diagram showing the high-level architecture for this project:
@@ -25,6 +22,18 @@ Below is a diagram showing the high-level architecture for this project:
 
 <img src="pipeline.png" width=100% height=50%>
 
+On your machine, when you run `make apply` terraform will read `config.yml` to understand what resources to spin-up. Once the resources are created with all of the proper permissions configured, you can head to the AWS Lambda console to test the function. 
+
+&nbsp;
+
+## Technologies Used
+- Terraform - Infrastructure
+- AWS Lambda - Data Processing
+- AWS S3 - Staging
+- Snowflake - Warehouse
+- Python - Application Code
+
+&nbsp;
 
 ## Prerequisites
 To get up and running with this project:
@@ -32,6 +41,8 @@ To get up and running with this project:
 2. Create a [Snowflake](https://www.snowflake.com/) Account
 3. Install [Terraform](https://developer.hashicorp.com/terraform/downloads)
 4. Install Python 3.7+
+
+&nbsp;
 
 ## Setup
 1. Clone the repo to your local machine and change into the repo directory
