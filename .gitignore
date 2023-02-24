@@ -38,4 +38,4 @@ terraform.rc
 
 venv
 
-config.yml
+logs
