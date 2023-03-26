@@ -21,7 +21,7 @@ Below is a diagram showing the high-level architecture for this project:
 On your machine, when you run `make apply` terraform will read `config.yml` to understand what resources to spin-up. Once the resources are created with all of the proper permissions configured, you can head to the AWS Lambda console to test the function. 
 
 
-## Technologies used
+## Technologies Used
 - Terraform - Infrastructure
 - AWS Lambda - Data Processing
 - AWS S3 - Staging
