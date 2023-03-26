@@ -25,8 +25,10 @@ On your machine, when you run `make apply` terraform will read `config.yml` to u
 - Terraform - Infrastructure
 - AWS Lambda - Data Processing
 - AWS S3 - Staging
+- AWS Elastic Container Registry (ECR) - Image Hosting
 - Snowflake - Warehouse
 - Python - Application Code
+- ECR 
 
 ## Prerequisites
 To get up and running with this project:
