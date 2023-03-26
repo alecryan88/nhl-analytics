@@ -54,31 +54,6 @@ resource "aws_iam_role_policy_attachment" "lambda_s3" {
   policy_arn = aws_iam_policy.lambda_s3.arn
 }
 
-resource "aws_lambda_function" "loader_lambdas" {
-  for_each = {
-    for index, loader in local.environment_config : loader.name => loader
-  }
-  function_name    = each.value.name
-  role             = aws_iam_role.iam_for_lambda.arn
-  package_type     = "Zip"
-  runtime          = "python3.9"
-  handler          = "app.handler"
-  filename         = data.archive_file.zip[each.value.original_name].output_path
-  timeout          = 60
-  source_code_hash = data.archive_file.zip[each.value.original_name].output_sha
-  environment {
-    variables = {
-      "S3_BUCKET_NAME" : each.value.s3_bucket_name
-    }
-  }
-
-  depends_on = [
-    #Requires a zip file with app code/dependencies before function can be created
-    data.archive_file.zip
-  ]
-
-}
-
 // Create the "cron" schedule
 resource "aws_cloudwatch_event_rule" "schedule" {
   for_each = {
@@ -108,4 +83,31 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_invoke" {
 
   source_arn = aws_cloudwatch_event_rule.schedule[each.value.name].arn
   principal  = "events.amazonaws.com"
+}
+
+// 
+resource "aws_lambda_function" "loader_lambdas" {
+  for_each = {
+    for index, loader in local.environment_config : loader.name => loader
+  }
+  function_name    = each.value.name
+  role             = aws_iam_role.iam_for_lambda.arn
+  package_type     = "Image"
+  timeout          = 60
+  memory_size      = 512
+  image_uri        = "${local.aws_ecr_url}/${each.value.name}:latest"
+  source_code_hash = docker_registry_image.loader_images[each.value.name].sha256_digest
+  environment {
+    variables = {
+      "S3_BUCKET_NAME" : each.value.s3_bucket_name
+    }
+  }
+
+  depends_on = [
+    #Requires docker images
+    docker_registry_image.loader_images,
+    aws_iam_role_policy_attachment.lambda_s3,
+    aws_iam_role.iam_for_lambda
+  ]
+
 }
