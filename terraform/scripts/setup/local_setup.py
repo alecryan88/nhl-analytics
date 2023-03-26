@@ -35,14 +35,6 @@ if __name__ == "__main__":
 
 requirements = """
 """
-
-def create_venv(path):
-    cmd = f"python3 -m venv ../loaders/{path}/venv"
-    os.system(cmd)
-
-def install_dot_env(path):
-    cmd = f"source ../loaders/{path}/venv/bin/activate && pip install python-dotenv"
-    os.system(cmd)
     
 def create_dir_if_not_exists(path):
     # Check whether the specified path exists or not
@@ -100,9 +92,6 @@ for file in loader_set:
         create_file_if_not_exists(dir, ".gitignore", git_ignore.strip())
         create_file_if_not_exists(dir, ".env", env.strip())
         create_file_if_not_exists(dir, "requirements.txt", requirements.strip())
-        create_venv(dir)
-        install_dot_env(dir)
-        
 
     else:
        pass

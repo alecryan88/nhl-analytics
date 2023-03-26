@@ -67,16 +67,6 @@ data "aws_iam_policy_document" "lambda_s3" {
   }
 }
 
-data "archive_file" "zip" {
-  for_each    = local.loader_names
-  type        = "zip"
-  source_dir  = "../loaders/${each.value}/venv/lib/python${var.python_version}/site-packages"
-  output_path = "../loaders/${each.value}/lambda.zip"
-
-  depends_on = [
-    null_resource.copy_app_code
-  ]
-
-}
-
 data "aws_caller_identity" "current" {}
+
+data "aws_ecr_authorization_token" "ecr_token" {}
